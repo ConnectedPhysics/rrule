@@ -9,6 +9,7 @@ import { optionsToString } from './optionstostring';
 import { Cache } from './cache';
 import { Weekday } from './weekday';
 import { iter } from './iter/index';
+import { Frequencies } from './frequencies';
 // =============================================================================
 // RRule
 // =============================================================================
@@ -194,15 +195,7 @@ var RRule = /** @class */ (function () {
         return new RRule(this.origOptions);
     };
     // RRule class 'constants'
-    RRule.FREQUENCIES = [
-        'YEARLY',
-        'MONTHLY',
-        'WEEKLY',
-        'DAILY',
-        'HOURLY',
-        'MINUTELY',
-        'SECONDLY'
-    ];
+    RRule.FREQUENCIES = Frequencies;
     RRule.YEARLY = Frequency.YEARLY;
     RRule.MONTHLY = Frequency.MONTHLY;
     RRule.WEEKLY = Frequency.WEEKLY;

@@ -12,6 +12,7 @@ import { optionsToString } from './optionstostring'
 import { Cache, CacheKeys } from './cache'
 import { Weekday } from './weekday'
 import { iter } from './iter/index'
+import { Frequencies } from './frequencies'
 
 // =============================================================================
 // RRule
@@ -64,15 +65,7 @@ export default class RRule implements QueryMethods {
 
   // RRule class 'constants'
 
-  static readonly FREQUENCIES: (keyof typeof Frequency)[] = [
-    'YEARLY',
-    'MONTHLY',
-    'WEEKLY',
-    'DAILY',
-    'HOURLY',
-    'MINUTELY',
-    'SECONDLY'
-  ]
+  static readonly FREQUENCIES: (keyof typeof Frequency)[] = Frequencies
 
   static readonly YEARLY = Frequency.YEARLY
   static readonly MONTHLY = Frequency.MONTHLY

@@ -1,7 +1,8 @@
 import ToText from './totext';
 import parseText from './parsetext';
-import RRule from '../index';
+import RRule from '../rrule';
 import ENGLISH from './i18n';
+import { FrequenciesHash } from '../frequencies';
 /*!
 * rrule.js - Library for working with recurrence rules for calendar dates.
 * https://github.com/jakubroztocil/rrule
@@ -104,12 +105,12 @@ var common = [
     'bymonth'
 ];
 ToText.IMPLEMENTED = [];
-ToText.IMPLEMENTED[RRule.HOURLY] = common;
-ToText.IMPLEMENTED[RRule.MINUTELY] = common;
-ToText.IMPLEMENTED[RRule.DAILY] = ['byhour'].concat(common);
-ToText.IMPLEMENTED[RRule.WEEKLY] = common;
-ToText.IMPLEMENTED[RRule.MONTHLY] = common;
-ToText.IMPLEMENTED[RRule.YEARLY] = ['byweekno', 'byyearday'].concat(common);
+ToText.IMPLEMENTED[FrequenciesHash.HOURLY] = common;
+ToText.IMPLEMENTED[FrequenciesHash.MINUTELY] = common;
+ToText.IMPLEMENTED[FrequenciesHash.DAILY] = ['byhour'].concat(common);
+ToText.IMPLEMENTED[FrequenciesHash.WEEKLY] = common;
+ToText.IMPLEMENTED[FrequenciesHash.MONTHLY] = common;
+ToText.IMPLEMENTED[FrequenciesHash.YEARLY] = ['byweekno', 'byyearday'].concat(common);
 // =============================================================================
 // Export
 // =============================================================================

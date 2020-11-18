@@ -1571,7 +1571,44 @@ function parseText(text, language) {
     }
 }
 
+// CONCATENATED MODULE: ./src/types.ts
+var Frequency;
+(function (Frequency) {
+    Frequency[Frequency["YEARLY"] = 0] = "YEARLY";
+    Frequency[Frequency["MONTHLY"] = 1] = "MONTHLY";
+    Frequency[Frequency["WEEKLY"] = 2] = "WEEKLY";
+    Frequency[Frequency["DAILY"] = 3] = "DAILY";
+    Frequency[Frequency["HOURLY"] = 4] = "HOURLY";
+    Frequency[Frequency["MINUTELY"] = 5] = "MINUTELY";
+    Frequency[Frequency["SECONDLY"] = 6] = "SECONDLY";
+})(Frequency || (Frequency = {}));
+function freqIsDailyOrGreater(freq) {
+    return freq < Frequency.HOURLY;
+}
+
+// CONCATENATED MODULE: ./src/frequencies.ts
+
+var Frequencies = [
+    'YEARLY',
+    'MONTHLY',
+    'WEEKLY',
+    'DAILY',
+    'HOURLY',
+    'MINUTELY',
+    'SECONDLY'
+];
+var FrequenciesHash = {
+    'YEARLY': Frequency.YEARLY,
+    'MONTHLY': Frequency.MONTHLY,
+    'WEEKLY': Frequency.WEEKLY,
+    'DAILY': Frequency.DAILY,
+    'HOURLY': Frequency.HOURLY,
+    'MINUTELY': Frequency.MINUTELY,
+    'SECONDLY': Frequency.SECONDLY
+};
+
 // CONCATENATED MODULE: ./src/nlp/index.ts
+
 
 
 
@@ -1667,7 +1704,7 @@ function parseText(text, language) {
  */
 var fromText = function (text, language) {
     if (language === void 0) { language = i18n; }
-    return new src(parseText(text, language) || undefined);
+    return new src_rrule(parseText(text, language) || undefined);
 };
 var common = [
     'count',
@@ -1678,12 +1715,12 @@ var common = [
     'bymonth'
 ];
 totext.IMPLEMENTED = [];
-totext.IMPLEMENTED[src.HOURLY] = common;
-totext.IMPLEMENTED[src.MINUTELY] = common;
-totext.IMPLEMENTED[src.DAILY] = ['byhour'].concat(common);
-totext.IMPLEMENTED[src.WEEKLY] = common;
-totext.IMPLEMENTED[src.MONTHLY] = common;
-totext.IMPLEMENTED[src.YEARLY] = ['byweekno', 'byyearday'].concat(common);
+totext.IMPLEMENTED[FrequenciesHash.HOURLY] = common;
+totext.IMPLEMENTED[FrequenciesHash.MINUTELY] = common;
+totext.IMPLEMENTED[FrequenciesHash.DAILY] = ['byhour'].concat(common);
+totext.IMPLEMENTED[FrequenciesHash.WEEKLY] = common;
+totext.IMPLEMENTED[FrequenciesHash.MONTHLY] = common;
+totext.IMPLEMENTED[FrequenciesHash.YEARLY] = ['byweekno', 'byyearday'].concat(common);
 // =============================================================================
 // Export
 // =============================================================================
@@ -1692,21 +1729,6 @@ var toText = function (rrule, gettext, language, dateFormatter) {
 };
 var isFullyConvertible = totext.isFullyConvertible;
 
-
-// CONCATENATED MODULE: ./src/types.ts
-var Frequency;
-(function (Frequency) {
-    Frequency[Frequency["YEARLY"] = 0] = "YEARLY";
-    Frequency[Frequency["MONTHLY"] = 1] = "MONTHLY";
-    Frequency[Frequency["WEEKLY"] = 2] = "WEEKLY";
-    Frequency[Frequency["DAILY"] = 3] = "DAILY";
-    Frequency[Frequency["HOURLY"] = 4] = "HOURLY";
-    Frequency[Frequency["MINUTELY"] = 5] = "MINUTELY";
-    Frequency[Frequency["SECONDLY"] = 6] = "SECONDLY";
-})(Frequency || (Frequency = {}));
-function freqIsDailyOrGreater(freq) {
-    return freq < Frequency.HOURLY;
-}
 
 // CONCATENATED MODULE: ./src/datetime.ts
 
@@ -3061,6 +3083,7 @@ function makeTimeset(ii, counterDate, options) {
 
 
 
+
 // =============================================================================
 // RRule
 // =============================================================================
@@ -3246,15 +3269,7 @@ var rrule_RRule = /** @class */ (function () {
         return new RRule(this.origOptions);
     };
     // RRule class 'constants'
-    RRule.FREQUENCIES = [
-        'YEARLY',
-        'MONTHLY',
-        'WEEKLY',
-        'DAILY',
-        'HOURLY',
-        'MINUTELY',
-        'SECONDLY'
-    ];
+    RRule.FREQUENCIES = Frequencies;
     RRule.YEARLY = Frequency.YEARLY;
     RRule.MONTHLY = Frequency.MONTHLY;
     RRule.WEEKLY = Frequency.WEEKLY;
